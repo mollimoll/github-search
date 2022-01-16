@@ -7,7 +7,7 @@ import {
 import { setContext } from "@apollo/client/link/context"
 import React, { useEffect, useState } from "react"
 import "./App.css"
-import { TestSearch } from "./components/test-search"
+import { SearchInput } from "./components/SearchInput"
 
 const httpLink = createHttpLink({
   uri: "https://api.github.com/graphql",
@@ -29,7 +29,7 @@ const CLIENT_ID = "af8cb8cd632a236a6c36"
 const REDIRECT_URI = "http://localhost:3000/"
 
 function App() {
-  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [isLoading, setIsLoading] = useState<boolean>(true)
   const [token, setToken] = useState<String | undefined>()
   const client = new ApolloClient({
     link: authLink.concat(httpLink),
@@ -58,7 +58,7 @@ function App() {
         >
           Login
         </a>
-        <TestSearch />
+        {!isLoading && localStorage.getItem("github_token") && <SearchInput />}
       </div>
     </ApolloProvider>
   )
