@@ -13,14 +13,21 @@ export type SearchResults = {
 
 export const Result = ({ login, avatarUrl, repositories }: SearchResults) => {
   return (
-    <>
-      <p>{login}</p>
+    <div className='result-row'>
       <img src={avatarUrl} alt='' />
-      {repositories.nodes.map(({ name, url }) => (
-        <a key={name} href={url}>
-          {name}
-        </a>
-      ))}
-    </>
+      <div className='result-content'>
+        <h2>{login}</h2>
+        <div>
+          <h3>Public repos:</h3>
+          {repositories.nodes.map(({ name, url }) => (
+            <div>
+              <a key={name} href={url}>
+                {name}
+              </a>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
   )
 }

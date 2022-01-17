@@ -32,11 +32,43 @@
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.result-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: left;
+  border: 1px solid grey;
+  max-width: 100%;
+  padding: 12px;
+  margin: 12px;
+}
+
+.result-row > img {
+  max-height: 120px;
+}
+
+.results-container {
+  max-width: 85%;
+}
+
+@media only screen and (max-width: 600px) {
+  .results-container {
+    max-width: 100%;
   }
-  to {
-    transform: rotate(360deg);
-  }
+}
+
+.result-content {
+  width: 100%;
+}
+
+input {
+  margin: 6px;
+}
+
+button {
+  margin: 6px;
+}
+
+.login {
+  margin: 6px;
 }

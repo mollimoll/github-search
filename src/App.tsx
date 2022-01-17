@@ -31,10 +31,12 @@ const REDIRECT_URI = "http://localhost:3000/"
 function App() {
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [token, setToken] = useState<String | undefined>()
+
   const client = new ApolloClient({
     link: authLink.concat(httpLink),
     cache: new InMemoryCache(),
   })
+
   useEffect(() => {
     const code = window.location.href.match(/\?code=(.*)/)?.[1]
     if (code && !token) {
@@ -42,7 +44,6 @@ function App() {
       fetch(`https://githubsearchmolly.herokuapp.com/authenticate/${code}`)
         .then((response) => response.json())
         .then(({ token }) => {
-          console.log(token)
           localStorage.setItem("github_token", token)
           setToken(token)
           setIsLoading(false)
@@ -54,6 +55,7 @@ function App() {
     <ApolloProvider client={client}>
       <div className='App'>
         <a
+          className='login'
           href={`https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}&scope=user&redirect_uri=${REDIRECT_URI}`}
         >
           Login
